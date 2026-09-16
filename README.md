@@ -29,7 +29,7 @@
 3. Запустить LearningjournalApplication.java
 4. Открыть в браузере: http://localhost:8080/hello
 
-Планы
+## Планы
 
 □ Добавить сущности Goal и Entry 
 
@@ -39,6 +39,6 @@
 
 □ Дерево подцелей
 
-Автор
+## Автор
 
 Ekaterina — начинающий Java-разработчик   
