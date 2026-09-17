@@ -1,4 +1,4 @@
-package com.ekaterina.learningjournal;
+package com.ekaterina.learningjournal.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

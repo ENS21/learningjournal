@@ -1,4 +1,4 @@
-package com.ekaterina.learningjournal;
+package com.ekaterina.learningjournal.model;
 
 public class Goal {
     private Long id;
