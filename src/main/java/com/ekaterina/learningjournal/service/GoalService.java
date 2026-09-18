@@ -12,8 +12,12 @@ public class GoalService {
     public GoalService(GoalRepository goalRepository) {
         this.goalRepository = goalRepository;
     }
-    public List<Goal> getAllGoals() {return goalRepository.findAll();}
-    public Optional<Goal> getGoalById(long id){return goalRepository.findById(id);}
+    public List<Goal> getAllGoals() {
+        return goalRepository.findAll();
+    }
+    public Optional<Goal> getGoalById(long id) {
+        return goalRepository.findById(id);
+    }
     public  Goal createGoal(Goal goal) {
         return goalRepository.save(goal);
     }

@@ -1,21 +1,46 @@
 package com.ekaterina.learningjournal.controller;
 
 import com.ekaterina.learningjournal.model.Goal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.ekaterina.learningjournal.service.GoalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/goals")
 public class GoalController {
-    @GetMapping("/goals")
-    public List<Goal> getAllGoal() {
-        return List.of(
-                new Goal("Setup Spring Boot project", "Basic project structure with Maven", "DONE"),
-                new Goal("Add Hello endpoint", "Simple REST controller", "DONE"),
-                new Goal("Implement CRUD for Goals", "Create, read, update, delete goals", "IN_PROGRESS"),
-                new Goal("Integrate PostgreSQL", "Database with JPA repositories", "NEW"),
-                new Goal("Build goals tree", "Parent-child relationship", "NEW")
-        );
+    private final GoalService goalService;
+    @Autowired
+    public GoalController(GoalService goalService) {
+        this.goalService = goalService;
+    }
+    // READ — получить все цели
+    @GetMapping
+    public List<Goal> getAllGoals() {
+        return goalService.getAllGoals();
+    }
+    // READ — получить одну цель по ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Goal> getGoalById(@PathVariable Long id) {
+        return goalService.getGoalById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+    // CREATE — создать новую цель
+    @PostMapping
+    public Goal createGoal (@RequestBody Goal goal) {
+        return goalService.createGoal(goal);
+    }
+    // UPDATE — обновить цель
+    @PutMapping
+    public Goal updateGoal (@PathVariable Long id, @RequestBody Goal goal) {
+        return goalService.updateGoal(id, goal);
+    }
+    // DELETE — удалить цель
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGoal(@PathVariable long id) {
+        goalService.deleteGoal(id);
+        return ResponseEntity.noContent().build();
     }
 }
