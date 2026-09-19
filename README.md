@@ -11,7 +11,7 @@
 - Java 21
 - Spring Boot 4.1.1
 - Spring Data JPA (Hibernate)
-- H2 Database (in-memory)
+- PostgreSQL 18
 - Maven
 - Git / GitHub
 
@@ -22,7 +22,7 @@
 - Модель Goal (цель) — JPA-сущность с полями id, title, description, status
 - REST-эндпоинт `/goals` — возвращает список целей
 - Настроена структура пакетов (controller, model, repository, service)
-- Подключена база данных H2
+- Подключена база данных PostgreSQL 18
 - Создан JPA-репозиторий `GoalRepository`
 - Создан сервис `GoalService` с CRUD-методами
 - Реализован полный CRUD REST API для целей
@@ -47,25 +47,20 @@
    | POST | `/api/goals` | Создать цель |
    | PUT | `/api/goals/{id}` | Обновить цель |
    | DELETE | `/api/goals/{id}` | Удалить цель |
-6. Для просмотра базы данных открой: http://localhost:8080/h2-console
-   ### Параметры подключения к H2
+6. Для просмотра базы данных открой **pgAdmin** и подключись к серверу `PostgreSQL 18` (пароль: `postgres`)
+   ### Настройка базы данных
 
-   | Поле | Значение |
-   |------|----------|
-   | JDBC URL | `jdbc:h2:mem:learningjournal` |
-   | User Name | `sa` |
-   | Password | (оставить пустым) |
-   
-   После подключения можно выполнять SQL-запросы, например: 
-   SELECT * FROM goals;
-
-
+   - Установить PostgreSQL 18
+   - Создать базу данных `learningjournal` через pgAdmin
+   - Настроить `application.properties`:
+   - `spring.datasource.password=` — твой пароль от `postgres`
+   - При первом запуске Hibernate **автоматически создаст** таблицу `goals`
 ## Планы
 
 - [X] Добавить сущность Goal
 - [ ] Добавить сущность Entry
 
-- [X] Подключить базу данных (H2 / PostgreSQL)
+- [X] Подключить базу данных (PostgreSQL)
 
 - [X] REST API для целей и записей
 
