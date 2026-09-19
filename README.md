@@ -25,19 +25,28 @@
 - Подключена база данных H2
 - Создан JPA-репозиторий `GoalRepository`
 - Создан сервис `GoalService` с CRUD-методами
+- Реализован полный CRUD REST API для целей
 - Автоматическое создание таблицы `goals` через Hibernate
 
 ## Как запустить
 
 1. Склонировать репозиторий:
-
    ```bash
    git clone https://github.com/ENS21/learningjournal.git
 
 2. Открыть проект в IntelliJ IDEA
 3. Запустить LearningjournalApplication.java
 4. Открыть в браузере: http://localhost:8080/hello
-5. Или: http://localhost:8080/goals — список целей
+5. Или: http://localhost:8080/api/goals — список целей
+   ### REST API
+
+   | Метод | URL | Описание |
+      |-------|-----|----------|
+   | GET | `/api/goals` | Получить все цели |
+   | GET | `/api/goals/{id}` | Получить цель по ID |
+   | POST | `/api/goals` | Создать цель |
+   | PUT | `/api/goals/{id}` | Обновить цель |
+   | DELETE | `/api/goals/{id}` | Удалить цель |
 6. Для просмотра базы данных открой: http://localhost:8080/h2-console
    ### Параметры подключения к H2
 
@@ -50,14 +59,15 @@
    После подключения можно выполнять SQL-запросы, например: 
    SELECT * FROM goals;
 
+
 ## Планы
 
-- [x] Добавить сущность Goal
+- [X] Добавить сущность Goal
 - [ ] Добавить сущность Entry
 
-- [x] Подключить базу данных (H2 / PostgreSQL)
+- [X] Подключить базу данных (H2 / PostgreSQL)
 
-- [ ] REST API для целей и записей
+- [X] REST API для целей и записей
 
 - [ ] Дерево подцелей
 
