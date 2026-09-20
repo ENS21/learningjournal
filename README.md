@@ -14,6 +14,8 @@
 - PostgreSQL 18
 - Maven
 - Git / GitHub
+- JUnit 5 + Mockito (тестирование)
+- Swagger / OpenAPI (документация API)
 
 ## Что уже готово
 
@@ -36,8 +38,8 @@
 
 2. Открыть проект в IntelliJ IDEA
 3. Запустить LearningjournalApplication.java
-4. Открыть в браузере: http://localhost:8080/hello
-5. Или: http://localhost:8080/api/goals — список целей
+4. Открыть в браузере: http://localhost:8080/api/goals — список целей
+
    ### REST API
 
    | Метод | URL | Описание |
@@ -47,7 +49,7 @@
    | POST | `/api/goals` | Создать цель |
    | PUT | `/api/goals/{id}` | Обновить цель |
    | DELETE | `/api/goals/{id}` | Удалить цель |
-6. Для просмотра базы данных открой **pgAdmin** и подключись к серверу `PostgreSQL 18` (пароль: `postgres`)
+5. Для просмотра базы данных открой **pgAdmin** и подключись к серверу `PostgreSQL 18` (пароль: `postgres`)
    ### Настройка базы данных
 
    - Установить PostgreSQL 18
@@ -55,16 +57,17 @@
    - Настроить `application.properties`:
    - `spring.datasource.password=` — твой пароль от `postgres`
    - При первом запуске Hibernate **автоматически создаст** таблицу `goals`
+   ## Swagger UI
+
+   Автоматическая документация API доступна по ссылке:
+   http://localhost:8080/swagger-ui/index.html
 ## Планы
 
 - [X] Добавить сущность Goal
-- [ ] Добавить сущность Entry
-
+- [x] Добавить сущность Entry
 - [X] Подключить базу данных (PostgreSQL)
-
 - [X] REST API для целей и записей
-
-- [ ] Дерево подцелей
+- [x] Дерево подцелей
 
 ## Автор
 
