@@ -1,10 +1,8 @@
 # Learning Journal
-
-Учебный проект на Spring Boot — дневник обучения с деревом целей.
-
+Учебный проект на Spring Boot — REST API для отслеживания личных целей и заметок об обучении.
 ## О проекте
 
-Приложение для отслеживания личных целей и заметок об обучении. Позволяет ставить цели, разбивать их на подцели и вести записи о прогрессе.
+Приложение для отслеживания  целей и заметок об обучении. Позволяет ставить цели, разбивать их на подцели и вести записи о прогрессе.
 
 ## Технологии
 
@@ -19,56 +17,92 @@
 
 ## Что уже готово
 
-- Базовый проект Spring Boot
-- REST-эндпоинт `/hello` — возвращает приветствие
-- Модель Goal (цель) — JPA-сущность с полями id, title, description, status
-- REST-эндпоинт `/goals` — возвращает список целей
-- Настроена структура пакетов (controller, model, repository, service)
-- Подключена база данных PostgreSQL 18
-- Создан JPA-репозиторий `GoalRepository`
-- Создан сервис `GoalService` с CRUD-методами
-- Реализован полный CRUD REST API для целей
-- Автоматическое создание таблицы `goals` через Hibernate
+- REST API с полным CRUD для целей (Goal)
+- REST API для записей к целям (Entry)
+- Связь One-to-Many между Goal и Entry
+- JPA-сущности с полями: id, title, description, status
+- Подключение к базе данных PostgreSQL 18
+- Автоматическое создание таблиц через Hibernate
+- Слоистая архитектура: controller, service, repository, model
+- Unit-тесты для сервисного слоя (JUnit 5 + Mockito)
+- Документация API через Swagger UI
+- Покрытие тестами: GoalService (4 теста)
+
+## Стек и архитектура
+
+Controller → Service → Repository → PostgreSQL
+
+- **Controller** — принимает HTTP-запросы
+- **Service** — бизнес-логика
+- **Repository** — работа с БД через JPA
+- **Model** — JPA-сущности
+
+## REST API
+
+### Цели (Goals)
+
+| Метод | URL | Описание |
+|-------|-----|----------|
+| GET | `/api/goals` | Получить все цели |
+| GET | `/api/goals/{id}` | Получить цель по ID |
+| POST | `/api/goals` | Создать цель |
+| PUT | `/api/goals/{id}` | Обновить цель |
+| DELETE | `/api/goals/{id}` | Удалить цель |
+
+### Записи (Entries)
+
+| Метод | URL | Описание |
+|-------|-----|----------|
+| GET | `/api/goals/{goalId}/entries` | Получить записи цели |
+| POST | `/api/goals/{goalId}/entries` | Создать запись |
+| DELETE | `/api/goals/{goalId}/entries/{id}` | Удалить запись |
 
 ## Как запустить
 
 1. Склонировать репозиторий:
+
    ```bash
    git clone https://github.com/ENS21/learningjournal.git
 
 2. Открыть проект в IntelliJ IDEA
-3. Запустить LearningjournalApplication.java
-4. Открыть в браузере: http://localhost:8080/api/goals — список целей
+3. Установить PostgreSQL 18
+4. Создать базу данных learningjournal через pgAdmin
+5. Настроить подключение в src/main/resources/application.properties
+6. Запустить LearningJournalApplication.java
+7. Открыть в браузере: http://localhost:8080/api/goals — список целей   
 
-   ### REST API
+## Swagger UI
 
-   | Метод | URL | Описание |
-      |-------|-----|----------|
-   | GET | `/api/goals` | Получить все цели |
-   | GET | `/api/goals/{id}` | Получить цель по ID |
-   | POST | `/api/goals` | Создать цель |
-   | PUT | `/api/goals/{id}` | Обновить цель |
-   | DELETE | `/api/goals/{id}` | Удалить цель |
-5. Для просмотра базы данных открой **pgAdmin** и подключись к серверу `PostgreSQL 18` (пароль: `postgres`)
-   ### Настройка базы данных
+Автоматическая документация API доступна по ссылке:
 
-   - Установить PostgreSQL 18
-   - Создать базу данных `learningjournal` через pgAdmin
-   - Настроить `application.properties`:
-   - `spring.datasource.password=` — твой пароль от `postgres`
-   - При первом запуске Hibernate **автоматически создаст** таблицу `goals`
-   ## Swagger UI
+http://localhost:8080/swagger-ui/index.html
+## Скриншоты
 
-   Автоматическая документация API доступна по ссылке:
-   http://localhost:8080/swagger-ui/index.html
+### REST API — ответ сервера
+
+![API Response](screenshots/01-api-response.jpg)
+
+### Swagger UI — документация API
+
+![Swagger UI](screenshots/02-swagger-ui.jpg)
+
+### PostgreSQL — таблицы с данными
+
+![pgAdmin](screenshots/03-pgadmin.jpg)
+
+### Postman — создание записи
+
+![Postman](screenshots/04-postman.jpg)
+
 ## Планы
-
-- [X] Добавить сущность Goal
+- [x] Добавить сущность Goal
 - [x] Добавить сущность Entry
-- [X] Подключить базу данных (PostgreSQL)
-- [X] REST API для целей и записей
-- [x] Дерево подцелей
+- [x] Подключить базу данных (PostgreSQL)
+- [x] REST API для целей и записей
+- [ ] Дерево подцелей
+- [ ] Автотесты Selenium
 
 ## Автор
 
-Ekaterina — начинающий Java-разработчик   
+Екатерина Соколова — начинающий Java-разработчик
+  
